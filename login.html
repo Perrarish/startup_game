@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Login</title>
+    <link rel="stylesheet" href="login and register.css">
+</head>
+<body>
+    <style>
+        body{
+            background-image: url(bg.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+
+<div class="login-container">
+    <h1>Game Login</h1>
+    <input type="text" id="username" class="input-field" placeholder="Username" required><br>
+    <input type="password" id="password" class="input-field" placeholder="Password" required><br>
+    <a href="gameplay.html"><button class="btn-next" onclick="loginUser()">Next</button><br><br></a>
+    
+    <p id="error-message" style="color: red; display: none;">Incorrect username or password. Please try again.</p>
+    
+    <p>Don't have an account? <a href="register.html" class="signup-link">Sign Up</a></p>
+</div>
+
+<script>
+    function loginUser() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+
+        // Simple mock validation: replace this with actual validation logic (e.g., checking from a database)
+        if (username === 'user' && password === 'password123') {
+            // If login is successful, go to the game page
+            window.location.href = 'gamepage.html'; // Change to your actual game page
+        } else {
+            // If credentials are incorrect, show error message
+            document.getElementById('error-message').style.display = 'block';
+        }
+    }
+</script>
+
+</body>
+</html>
