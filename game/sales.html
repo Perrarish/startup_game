@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startup Game
+      <link rel="stylesheet" href="sales.css">
+    </title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #1f4037, #99f2c8);
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        button {
+            background-color: #ff7e5f;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+        button:hover {
+            background-color: #feb47b;
+            transform: scale(1.05);
+        }
+        .slider-container, .investor-container {
+            margin: 20px 0;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            background: #ff7e5f;
+            border-radius: 5px;
+            outline: none;
+            transition: background 0.3s;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #feb47b;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #feb47b;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .slider-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff7e5f;
+        }
+        .investor-options {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .investor-button {
+            border: 2px solid #fff;
+            background: transparent;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+        .investor-button.active {
+            background-color: #ff7e5f;
+            color: #fff;
+        }
+        .investor-button:hover {
+            background-color: #feb47b;
+            color: #fff;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+  <style>
+    body{
+        background-image: url(bg.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+    <div class="container">
+        <h1>"Honesty is the first chapter in the book of wisdom."</h1>
+        <form id="gameForm">
+            <label for="points">Choose Total Points:</label>
+            <div class="slider-container">
+                <input type="range" id="points" name="points" min="0" max="20" value="10" oninput="updateSliderValue(this.value)">
+                <div class="slider-value" id="sliderValue">10</div>
+            </div>
+
+            <label for="investor">Choose Investor Option:</label>
+            <div class="investor-container">
+                <div class="investor-options">
+                    <button type="button" class="investor-button" id="investorYes" onclick="selectInvestor('yes')">Investor: Yes</button>
+                    <button type="button" class="investor-button" id="investorNo" onclick="selectInvestor('no')">Investor: No</button>
+                </div>
+            </div>
+
+            <button type="button" onclick="calculateResult()">Launch and Sell Product</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        let selectedInvestor = "no"; // Default investor choice
+
+        function updateSliderValue(value) {
+            document.getElementById("sliderValue").innerText = value;
+        }
+
+        function selectInvestor(choice) {
+            selectedInvestor = choice;
+            document.getElementById("investorYes").classList.remove("active");
+            document.getElementById("investorNo").classList.remove("active");
+            
+            if (choice === "yes") {
+                document.getElementById("investorYes").classList.add("active");
+            } else {
+                document.getElementById("investorNo").classList.add("active");
+            }
+        }
+
+        function calculateResult() {
+            const points = parseInt(document.getElementById("points").value);
+            let resultMessage = "";
+
+            if (points < 10) {
+                resultMessage = "The company is in loss.";
+            } else {
+                let profit = (points / 100) * points + 500000;
+                if (selectedInvestor === "yes") {
+                    profit -= profit * 0.05;
+                }
+                resultMessage = `The company is in profit! Total profit: ₹${profit.toFixed(2)}`;
+            }
+
+            document.getElementById("result").innerText = resultMessage;
+        }
+    </script>
+</body>
+</html>
